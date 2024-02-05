@@ -63,13 +63,12 @@ export default function Card({ item }) {
             </View>
             <View style={styles.buttonAddContainer}>
                 <Text style={styles.cardPrice} >{item.price}</Text>
-                <TouchableWithoutFeedback 
-                onPress={() => addCartButton(item.id)}>
+                <TouchableWithoutFeedback
+                    onPress={() => addCartButton(item.id)}>
                     <View style={styles.cardButtonAdd}>
                         <Text style={styles.cardButtonAddTitle}>Add</Text>
                     </View>
                 </TouchableWithoutFeedback>
-
             </View>
         </View>
     )

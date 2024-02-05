@@ -1,50 +1,27 @@
-import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native'
-import Card from './components/card/Card';
+import { StyleSheet } from 'react-native'
 import React from 'react';
-import axios from 'axios';
+import { Navigation } from './components/card/Navigation';
+import MyContext from './MyContext';
 
 export default function App() {
 
   const [cardItem, setCardItem] = React.useState([]);
-
-  React.useEffect(() => {
-
-    axios.get('https://642e6fc62b883abc640da793.mockapi.io/data')
-    .then(({data}) => {
-      setCardItem(data)
-    }).catch((error) => {
-      console.log(error)
-    })
-
-  }, [])
+  const [isLoading, setIsLoading] = React.useState(true)
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.cardFlex}>
-        {/* {cardItem.map((item) => (
-          <Card key={item.id}></Card>
-        ))} */}
-        <FlatList 
-          data={cardItem}
-          renderItem={({item}) => <Card key={item.id} item={item}></Card>}
-        />
-      </View>
-    </SafeAreaView>
-  );
+    <MyContext.Provider value={{
+      cardItem,
+      setCardItem,
+      isLoading,
+      setIsLoading
+    }}>
+      <Navigation></Navigation>
+    </MyContext.Provider>
+  )
 }
 
 const styles = StyleSheet.create({
 
-  container: {
-    width: '100%',
-    height: '100svh',
-    flexDirection: 'row', 
-    justifyContent: 'center',
-  
-  },
 
-  cardFlex: {
-    width: '90%',
-  }
 
 });
